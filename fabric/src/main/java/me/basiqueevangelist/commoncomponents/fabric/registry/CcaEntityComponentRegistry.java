@@ -1,9 +1,11 @@
-package me.basiqueevangelist.commoncomponents.fabric;
+package me.basiqueevangelist.commoncomponents.fabric.registry;
 
 import dev.onyxstudios.cca.api.v3.entity.EntityComponentFactoryRegistry;
 import me.basiqueevangelist.commoncomponents.Component;
 import me.basiqueevangelist.commoncomponents.ComponentRef;
-import me.basiqueevangelist.commoncomponents.EntityComponentRegistry;
+import me.basiqueevangelist.commoncomponents.fabric.CcaComponent;
+import me.basiqueevangelist.commoncomponents.fabric.CcaComponentRef;
+import me.basiqueevangelist.commoncomponents.registry.EntityComponentRegistry;
 import net.minecraft.entity.Entity;
 
 import java.util.function.Function;

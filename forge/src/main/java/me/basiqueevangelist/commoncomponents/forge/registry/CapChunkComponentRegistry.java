@@ -1,6 +1,8 @@
-package me.basiqueevangelist.commoncomponents.forge;
+package me.basiqueevangelist.commoncomponents.forge.registry;
 
-import me.basiqueevangelist.commoncomponents.ChunkComponentRegistry;
+import me.basiqueevangelist.commoncomponents.forge.CapComponentRef;
+import me.basiqueevangelist.commoncomponents.forge.ComponentCapProvider;
+import me.basiqueevangelist.commoncomponents.registry.ChunkComponentRegistry;
 import me.basiqueevangelist.commoncomponents.Component;
 import me.basiqueevangelist.commoncomponents.ComponentRef;
 import net.minecraft.world.chunk.Chunk;

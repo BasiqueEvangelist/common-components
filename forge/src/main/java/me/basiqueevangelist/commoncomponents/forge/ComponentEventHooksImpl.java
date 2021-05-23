@@ -1,6 +1,7 @@
 package me.basiqueevangelist.commoncomponents.forge;
 
 import me.basiqueevangelist.commoncomponents.ComponentEvents;
+import me.basiqueevangelist.commoncomponents.forge.registry.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;

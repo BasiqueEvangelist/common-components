@@ -1,5 +1,7 @@
-package me.basiqueevangelist.commoncomponents;
+package me.basiqueevangelist.commoncomponents.registry;
 
+import me.basiqueevangelist.commoncomponents.Component;
+import me.basiqueevangelist.commoncomponents.ComponentRef;
 import net.minecraft.block.entity.BlockEntity;
 
 import java.util.function.Function;

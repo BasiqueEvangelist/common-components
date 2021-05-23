@@ -1,7 +1,9 @@
-package me.basiqueevangelist.commoncomponents.fabric;
+package me.basiqueevangelist.commoncomponents.fabric.registry;
 
 import dev.onyxstudios.cca.api.v3.chunk.ChunkComponentFactoryRegistry;
-import me.basiqueevangelist.commoncomponents.ChunkComponentRegistry;
+import me.basiqueevangelist.commoncomponents.fabric.CcaComponent;
+import me.basiqueevangelist.commoncomponents.fabric.CcaComponentRef;
+import me.basiqueevangelist.commoncomponents.registry.ChunkComponentRegistry;
 import me.basiqueevangelist.commoncomponents.Component;
 import me.basiqueevangelist.commoncomponents.ComponentRef;
 import net.minecraft.world.chunk.Chunk;

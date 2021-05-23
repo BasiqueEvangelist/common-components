@@ -11,6 +11,7 @@ import dev.onyxstudios.cca.api.v3.item.ItemComponentInitializer;
 import dev.onyxstudios.cca.api.v3.world.WorldComponentFactoryRegistry;
 import dev.onyxstudios.cca.api.v3.world.WorldComponentInitializer;
 import me.basiqueevangelist.commoncomponents.ComponentEvents;
+import me.basiqueevangelist.commoncomponents.fabric.registry.*;
 
 public class ComponentEventHooksImpl implements EntityComponentInitializer, ItemComponentInitializer, WorldComponentInitializer, ChunkComponentInitializer, BlockComponentInitializer {
     @Override

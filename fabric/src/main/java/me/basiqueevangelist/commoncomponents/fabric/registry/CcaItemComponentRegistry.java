@@ -1,9 +1,11 @@
-package me.basiqueevangelist.commoncomponents.fabric;
+package me.basiqueevangelist.commoncomponents.fabric.registry;
 
 import dev.onyxstudios.cca.api.v3.item.ItemComponentFactoryRegistry;
 import me.basiqueevangelist.commoncomponents.Component;
 import me.basiqueevangelist.commoncomponents.ComponentRef;
-import me.basiqueevangelist.commoncomponents.ItemComponentRegistry;
+import me.basiqueevangelist.commoncomponents.fabric.CcaComponent;
+import me.basiqueevangelist.commoncomponents.fabric.CcaComponentRef;
+import me.basiqueevangelist.commoncomponents.registry.ItemComponentRegistry;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;

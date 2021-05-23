@@ -1,5 +1,7 @@
-package me.basiqueevangelist.commoncomponents;
+package me.basiqueevangelist.commoncomponents.registry;
 
+import me.basiqueevangelist.commoncomponents.Component;
+import me.basiqueevangelist.commoncomponents.ComponentRef;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;

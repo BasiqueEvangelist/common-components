@@ -1,5 +1,6 @@
 package me.basiqueevangelist.commoncomponents;
 
+import me.basiqueevangelist.commoncomponents.registry.*;
 import me.shedaniel.architectury.event.Event;
 import me.shedaniel.architectury.event.EventFactory;
 

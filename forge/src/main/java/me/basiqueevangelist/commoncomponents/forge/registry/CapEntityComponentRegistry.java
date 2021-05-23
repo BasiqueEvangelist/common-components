@@ -1,8 +1,10 @@
-package me.basiqueevangelist.commoncomponents.forge;
+package me.basiqueevangelist.commoncomponents.forge.registry;
 
 import me.basiqueevangelist.commoncomponents.Component;
 import me.basiqueevangelist.commoncomponents.ComponentRef;
-import me.basiqueevangelist.commoncomponents.EntityComponentRegistry;
+import me.basiqueevangelist.commoncomponents.forge.CapComponentRef;
+import me.basiqueevangelist.commoncomponents.forge.ComponentCapProvider;
+import me.basiqueevangelist.commoncomponents.registry.EntityComponentRegistry;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 
