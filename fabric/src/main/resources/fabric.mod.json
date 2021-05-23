@@ -14,9 +14,6 @@
   "license": "LGPL-3.0-only",
   "environment": "*",
   "entrypoints": {
-    "main": [
-      "me.basiqueevangelist.commoncomponents.fabric.CommonComponentsFabric"
-    ],
     "cardinal-components": [
       "me.basiqueevangelist.commoncomponents.fabric.ComponentEventHooksImpl"
     ]

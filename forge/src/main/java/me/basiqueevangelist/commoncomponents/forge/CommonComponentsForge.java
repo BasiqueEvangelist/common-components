@@ -20,8 +20,6 @@ public class CommonComponentsForge {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onCommonSetup);
 
         ComponentEventHooksImpl.init();
-
-        CommonComponents.init();
     }
 
     @SubscribeEvent
