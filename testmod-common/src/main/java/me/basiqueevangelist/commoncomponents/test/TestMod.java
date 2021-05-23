@@ -2,6 +2,7 @@ package me.basiqueevangelist.commoncomponents.test;
 
 import me.basiqueevangelist.commoncomponents.ComponentEvents;
 import me.basiqueevangelist.commoncomponents.DeferredComponentRef;
+import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
@@ -25,6 +26,10 @@ public class TestMod {
 
         ComponentEvents.CHUNK.register(registry -> {
             registry.register(EXAMPLE_COMPONENT.get(), ExampleComponentImpl::new);
+        });
+
+        ComponentEvents.BLOCK.register(registry -> {
+            registry.registerFor(ChestBlockEntity.class, EXAMPLE_COMPONENT.get(), ExampleComponentImpl::new);
         });
     }
 }

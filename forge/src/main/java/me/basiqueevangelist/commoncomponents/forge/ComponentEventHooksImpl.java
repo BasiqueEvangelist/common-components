@@ -27,6 +27,7 @@ public final class ComponentEventHooksImpl {
 
     @SubscribeEvent
     protected static void attachBlockEntityCapabilities(AttachCapabilitiesEvent<BlockEntity> event) {
+        ComponentEvents.BLOCK.invoker().registerBlockComponents(new CapabilityBlockComponentRegistry(event));
     }
 
     @SubscribeEvent
