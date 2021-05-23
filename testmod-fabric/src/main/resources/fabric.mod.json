@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "common-components-testmod",
+  "version": "${version}",
+  "name": "Common Components Test Mod",
+  "description": "API papering over the differences between CCA and Forge Capabilities. (Test Mod)",
+  "authors": [
+    "BasiqueEvangelist"
+  ],
+  "contact": {
+    "sources": "https://github.com/BasiqueEvangelist/common-components",
+    "issues": "https://github.com/BasiqueEvangelist/common-components/issues"
+  },
+  "license": "LGPL-3.0-only",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "me.basiqueevangelist.commoncomponents.test.fabric.TestModFabric"
+    ]
+  },
+  "custom": {
+    "cardinal-components": [
+      "common-components-testmod:example"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.7.4",
+    "fabric": "*",
+    "minecraft": ">=1.16.4",
+    "architectury": ">=1.1.55",
+    "common-components": "*"
+  }
+}

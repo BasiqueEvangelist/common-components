@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "common-components",
+  "version": "${version}",
+  "name": "Common Components",
+  "description": "API papering over the differences between CCA and Forge Capabilities.",
+  "authors": [
+    "BasiqueEvangelist"
+  ],
+  "contact": {
+    "sources": "https://github.com/BasiqueEvangelist/common-components",
+    "issues": "https://github.com/BasiqueEvangelist/common-components/issues"
+  },
+  "license": "LGPL-3.0-only",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "me.basiqueevangelist.commoncomponents.fabric.CommonComponentsFabric"
+    ],
+    "cardinal-components-entity": [
+      "me.basiqueevangelist.commoncomponents.fabric.ComponentEventHooksImpl"
+    ],
+    "cardinal-components-item": [
+      "me.basiqueevangelist.commoncomponents.fabric.ComponentEventHooksImpl"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.7.4",
+    "fabric": "*",
+    "minecraft": ">=1.16.4",
+    "architectury": ">=1.1.55"
+  }
+}

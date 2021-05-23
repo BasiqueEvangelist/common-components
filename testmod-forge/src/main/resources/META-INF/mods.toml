@@ -1,0 +1,42 @@
+modLoader = "javafml"
+loaderVersion = "[35,)"
+issueTrackerURL = "https://github.com/BasiqueEvangelist/common-components/issues"
+license = "LGPL-3.0-only"
+
+[[mods]]
+modId = "common-components-testmod"
+version = "${version}"
+displayName = "Common Components Test Mod"
+authors = "BasiqueEvangelist"
+description = '''
+API papering over the differences between CCA and Forge Capabilities. (Test Mod)
+'''
+#logoFile = ""
+
+[[dependencies.common-components-testmod]]
+modId = "forge"
+mandatory = true
+versionRange = "[35,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.common-components-testmod]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.16.2,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.common-components-testmod]]
+modId = "architectury"
+mandatory = true
+versionRange = "[1.1.55,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.common-components-testmod]]
+modId = "common-components"
+mandatory = true
+versionRange = "*"
+ordering = "AFTER"
+side = "BOTH"
