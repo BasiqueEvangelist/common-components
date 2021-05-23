@@ -22,5 +22,9 @@ public class TestMod {
         ComponentEvents.WORLD.register(registry -> {
             registry.register(EXAMPLE_COMPONENT.get(), ExampleComponentImpl::new);
         });
+
+        ComponentEvents.CHUNK.register(registry -> {
+            registry.register(EXAMPLE_COMPONENT.get(), ExampleComponentImpl::new);
+        });
     }
 }

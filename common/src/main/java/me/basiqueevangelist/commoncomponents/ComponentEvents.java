@@ -7,6 +7,7 @@ public class ComponentEvents {
     public static final Event<EntityComponentAttacher> ENTITY = EventFactory.createLoop();
     public static final Event<ItemComponentAttacher> ITEM = EventFactory.createLoop();
     public static final Event<WorldComponentAttacher> WORLD = EventFactory.createLoop();
+    public static final Event<ChunkComponentAttacher> CHUNK = EventFactory.createLoop();
 
     public interface EntityComponentAttacher {
         void registerEntityComponents(EntityComponentRegistry registry);
@@ -18,5 +19,9 @@ public class ComponentEvents {
 
     public interface WorldComponentAttacher {
         void registerWorldComponents(WorldComponentRegistry registry);
+    }
+
+    public interface ChunkComponentAttacher {
+        void registerChunkComponents(ChunkComponentRegistry registry);
     }
 }

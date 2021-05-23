@@ -6,6 +6,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
+import net.minecraft.world.chunk.WorldChunk;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -39,6 +40,7 @@ public final class ComponentEventHooksImpl {
     }
 
     @SubscribeEvent
-    protected static void attachChunkCapabilities(AttachCapabilitiesEvent<Chunk> event) {
+    protected static void attachChunkCapabilities(AttachCapabilitiesEvent<WorldChunk> event) {
+        ComponentEvents.CHUNK.invoker().registerChunkComponents(new CapabilityChunkComponentRegistry(event));
     }
 }
