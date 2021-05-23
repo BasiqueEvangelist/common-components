@@ -7,8 +7,8 @@ import java.util.Objects;
 public class ExampleComponentImpl implements ExampleComponent {
     private int value = 0;
 
-    public ExampleComponentImpl() {
-        System.out.println("Called!");
+    public ExampleComponentImpl(Object attachedTo) {
+        System.out.println("Called! " + (attachedTo == null ? "null" : attachedTo.getClass()));
     }
 
     @Override

@@ -35,6 +35,7 @@ public final class ComponentEventHooksImpl {
 
     @SubscribeEvent
     protected static void attachWorldCapabilities(AttachCapabilitiesEvent<World> event) {
+        ComponentEvents.WORLD.invoker().registerWorldComponents(new CapabilityWorldComponentRegistry(event));
     }
 
     @SubscribeEvent

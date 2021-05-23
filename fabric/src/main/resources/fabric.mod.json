@@ -17,10 +17,7 @@
     "main": [
       "me.basiqueevangelist.commoncomponents.fabric.CommonComponentsFabric"
     ],
-    "cardinal-components-entity": [
-      "me.basiqueevangelist.commoncomponents.fabric.ComponentEventHooksImpl"
-    ],
-    "cardinal-components-item": [
+    "cardinal-components": [
       "me.basiqueevangelist.commoncomponents.fabric.ComponentEventHooksImpl"
     ]
   },

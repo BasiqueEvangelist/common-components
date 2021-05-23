@@ -8,15 +8,19 @@ import net.minecraft.util.Identifier;
 
 public class TestMod {
     public static final String MODID = "common-components-testmod";
-    public static final DeferredComponentRef<ExampleComponent> EXAMPLE_COMPONENT = new DeferredComponentRef<>(new Identifier(MODID, "example"), ExampleComponent.class, ExampleComponentImpl::new);
+    public static final DeferredComponentRef<ExampleComponent> EXAMPLE_COMPONENT = new DeferredComponentRef<>(new Identifier(MODID, "example"), ExampleComponent.class, () -> new ExampleComponentImpl(null));
 
     public static void init() {
         ComponentEvents.ENTITY.register(registry -> {
-            registry.registerFor(LivingEntity.class, EXAMPLE_COMPONENT.get(), e -> new ExampleComponentImpl());
+            registry.registerFor(LivingEntity.class, EXAMPLE_COMPONENT.get(), ExampleComponentImpl::new);
         });
 
         ComponentEvents.ITEM.register(registry -> {
-            registry.registerFor(Items.STONE, EXAMPLE_COMPONENT.get(), e -> new ExampleComponentImpl());
+            registry.registerFor(Items.STONE, EXAMPLE_COMPONENT.get(), ExampleComponentImpl::new);
+        });
+
+        ComponentEvents.WORLD.register(registry -> {
+            registry.register(EXAMPLE_COMPONENT.get(), ExampleComponentImpl::new);
         });
     }
 }
