@@ -5,7 +5,6 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.WorldChunk;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -22,26 +21,26 @@ public final class ComponentEventHooksImpl {
 
     @SubscribeEvent
     protected static void attachEntityCapabilities(AttachCapabilitiesEvent<Entity> event) {
-        ComponentEvents.ENTITY.invoker().registerEntityComponents(new CapabilityEntityComponentRegistry(event));
+        ComponentEvents.ENTITY.invoker().registerEntityComponents(new CapEntityComponentRegistry(event));
     }
 
     @SubscribeEvent
     protected static void attachBlockEntityCapabilities(AttachCapabilitiesEvent<BlockEntity> event) {
-        ComponentEvents.BLOCK.invoker().registerBlockComponents(new CapabilityBlockComponentRegistry(event));
+        ComponentEvents.BLOCK.invoker().registerBlockComponents(new CapBlockComponentRegistry(event));
     }
 
     @SubscribeEvent
     protected static void attachItemStackCapabilities(AttachCapabilitiesEvent<ItemStack> event) {
-        ComponentEvents.ITEM.invoker().registerItemComponents(new CapabilityItemComponentRegistry(event));
+        ComponentEvents.ITEM.invoker().registerItemComponents(new CapItemComponentRegistry(event));
     }
 
     @SubscribeEvent
     protected static void attachWorldCapabilities(AttachCapabilitiesEvent<World> event) {
-        ComponentEvents.WORLD.invoker().registerWorldComponents(new CapabilityWorldComponentRegistry(event));
+        ComponentEvents.WORLD.invoker().registerWorldComponents(new CapWorldComponentRegistry(event));
     }
 
     @SubscribeEvent
     protected static void attachChunkCapabilities(AttachCapabilitiesEvent<WorldChunk> event) {
-        ComponentEvents.CHUNK.invoker().registerChunkComponents(new CapabilityChunkComponentRegistry(event));
+        ComponentEvents.CHUNK.invoker().registerChunkComponents(new CapChunkComponentRegistry(event));
     }
 }

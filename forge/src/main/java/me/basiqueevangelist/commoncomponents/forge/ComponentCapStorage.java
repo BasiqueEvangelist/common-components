@@ -7,7 +7,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 import org.jetbrains.annotations.Nullable;
 
-public class ForgeComponentStorage<T extends Component> implements Capability.IStorage<T> {
+public class ComponentCapStorage<T extends Component> implements Capability.IStorage<T> {
     @Nullable
     @Override
     public Tag writeNBT(Capability<T> capability, T object, Direction arg) {

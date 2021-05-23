@@ -8,15 +8,15 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 
 import java.util.function.Function;
 
-public class CapabilityWorldComponentRegistry implements WorldComponentRegistry {
+public class CapWorldComponentRegistry implements WorldComponentRegistry {
     private final AttachCapabilitiesEvent<World> event;
 
-    public CapabilityWorldComponentRegistry(AttachCapabilitiesEvent<World> event) {
+    public CapWorldComponentRegistry(AttachCapabilitiesEvent<World> event) {
         this.event = event;
     }
 
     @Override
     public <T extends Component> void register(ComponentRef<T> ref, Function<World, T> factory) {
-        event.addCapability(ref.getComponentId(), new ComponentCapabilityProvider<>((CapabilityComponentRef<T>) ref, factory.apply(event.getObject())));
+        event.addCapability(ref.getComponentId(), new ComponentCapProvider<>((CapComponentRef<T>) ref, factory.apply(event.getObject())));
     }
 }

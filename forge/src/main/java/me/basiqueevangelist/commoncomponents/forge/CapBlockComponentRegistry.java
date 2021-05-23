@@ -8,10 +8,10 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 
 import java.util.function.Function;
 
-public class CapabilityBlockComponentRegistry implements BlockComponentRegistry {
+public class CapBlockComponentRegistry implements BlockComponentRegistry {
     private final AttachCapabilitiesEvent<BlockEntity> event;
 
-    public CapabilityBlockComponentRegistry(AttachCapabilitiesEvent<BlockEntity> event) {
+    public CapBlockComponentRegistry(AttachCapabilitiesEvent<BlockEntity> event) {
         this.event = event;
     }
 
@@ -19,6 +19,6 @@ public class CapabilityBlockComponentRegistry implements BlockComponentRegistry 
     @SuppressWarnings("unchecked")
     public <T extends Component, B extends BlockEntity> void registerFor(Class<B> target, ComponentRef<T> ref, Function<B, T> factory) {
         if (target.isInstance(event.getObject()))
-            event.addCapability(ref.getComponentId(), new ComponentCapabilityProvider<>((CapabilityComponentRef<T>) ref, factory.apply((B) event.getObject())));
+            event.addCapability(ref.getComponentId(), new ComponentCapProvider<>((CapComponentRef<T>) ref, factory.apply((B) event.getObject())));
     }
 }

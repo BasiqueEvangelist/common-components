@@ -11,28 +11,28 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-public class CapabilityItemComponentRegistry implements ItemComponentRegistry {
+public class CapItemComponentRegistry implements ItemComponentRegistry {
     private final AttachCapabilitiesEvent<ItemStack> event;
 
-    public CapabilityItemComponentRegistry(AttachCapabilitiesEvent<ItemStack> event) {
+    public CapItemComponentRegistry(AttachCapabilitiesEvent<ItemStack> event) {
         this.event = event;
     }
 
     @Override
     public <T extends Component> void registerFor(Item item, ComponentRef<T> ref, Function<ItemStack, ? extends T> factory) {
         if (event.getObject().getItem() == item)
-            event.addCapability(ref.getComponentId(), new ComponentCapabilityProvider<>((CapabilityComponentRef<T>) ref, factory.apply(event.getObject())));
+            event.addCapability(ref.getComponentId(), new ComponentCapProvider<>((CapComponentRef<T>) ref, factory.apply(event.getObject())));
     }
 
     @Override
     public <T extends Component> void registerFor(Identifier itemId, ComponentRef<T> ref, Function<ItemStack, ? extends T> factory) {
         if (event.getObject().getItem().getRegistryName() == itemId)
-            event.addCapability(ref.getComponentId(), new ComponentCapabilityProvider<>((CapabilityComponentRef<T>) ref, factory.apply(event.getObject())));
+            event.addCapability(ref.getComponentId(), new ComponentCapProvider<>((CapComponentRef<T>) ref, factory.apply(event.getObject())));
     }
 
     @Override
     public <T extends Component> void registerFor(Predicate<Item> test, ComponentRef<T> ref, Function<ItemStack, ? extends T> factory) {
         if (test.test(event.getObject().getItem()))
-            event.addCapability(ref.getComponentId(), new ComponentCapabilityProvider<>((CapabilityComponentRef<T>) ref, factory.apply(event.getObject())));
+            event.addCapability(ref.getComponentId(), new ComponentCapProvider<>((CapComponentRef<T>) ref, factory.apply(event.getObject())));
     }
 }

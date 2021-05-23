@@ -9,15 +9,15 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 
 import java.util.function.Function;
 
-public class CapabilityChunkComponentRegistry implements ChunkComponentRegistry {
+public class CapChunkComponentRegistry implements ChunkComponentRegistry {
     private final AttachCapabilitiesEvent<WorldChunk> event;
 
-    public CapabilityChunkComponentRegistry(AttachCapabilitiesEvent<WorldChunk> event) {
+    public CapChunkComponentRegistry(AttachCapabilitiesEvent<WorldChunk> event) {
         this.event = event;
     }
 
     @Override
     public <T extends Component> void register(ComponentRef<T> ref, Function<Chunk, T> factory) {
-        event.addCapability(ref.getComponentId(), new ComponentCapabilityProvider<>((CapabilityComponentRef<T>) ref, factory.apply(event.getObject())));
+        event.addCapability(ref.getComponentId(), new ComponentCapProvider<>((CapComponentRef<T>) ref, factory.apply(event.getObject())));
     }
 }

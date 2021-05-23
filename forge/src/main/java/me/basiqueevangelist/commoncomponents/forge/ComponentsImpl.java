@@ -14,7 +14,7 @@ import java.util.function.Supplier;
 public class ComponentsImpl {
     public static <T extends Component> void registerDeferred(DeferredComponentRef<T> ref, Identifier componentId, Class<T> componentInterface, Supplier<T> defaultFactory) {
         CommonComponentsForge.COMMON_SETUP_TASKS.add(() -> {
-            CapabilityManager.INSTANCE.register(componentInterface, new ForgeComponentStorage<>(), defaultFactory::get);
+            CapabilityManager.INSTANCE.register(componentInterface, new ComponentCapStorage<>(), defaultFactory::get);
 
             ref.setRef(get(componentId, componentInterface));
         });
@@ -31,6 +31,6 @@ public class ComponentsImpl {
             throw new RuntimeException(e);
         }
 
-        return new CapabilityComponentRef<>((Capability<T>) providersMap.get(componentInterface.getCanonicalName()), componentInterface, componentId);
+        return new CapComponentRef<>((Capability<T>) providersMap.get(componentInterface.getCanonicalName()), componentInterface, componentId);
     }
 }

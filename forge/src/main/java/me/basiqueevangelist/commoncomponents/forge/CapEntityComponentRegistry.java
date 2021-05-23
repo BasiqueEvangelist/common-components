@@ -8,10 +8,10 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 
 import java.util.function.Function;
 
-public class CapabilityEntityComponentRegistry implements EntityComponentRegistry {
+public class CapEntityComponentRegistry implements EntityComponentRegistry {
     private final AttachCapabilitiesEvent<Entity> event;
 
-    public CapabilityEntityComponentRegistry(AttachCapabilitiesEvent<Entity> event) {
+    public CapEntityComponentRegistry(AttachCapabilitiesEvent<Entity> event) {
         this.event = event;
     }
 
@@ -19,6 +19,6 @@ public class CapabilityEntityComponentRegistry implements EntityComponentRegistr
     @Override
     public <T extends Component, E extends Entity> void registerFor(Class<E> target, ComponentRef<T> ref, Function<E, ? extends T> factory) {
         if (target.isInstance(event.getObject()))
-            event.addCapability(ref.getComponentId(), new ComponentCapabilityProvider<>((CapabilityComponentRef<T>) ref, factory.apply((E) event.getObject())));
+            event.addCapability(ref.getComponentId(), new ComponentCapProvider<>((CapComponentRef<T>) ref, factory.apply((E) event.getObject())));
     }
 }

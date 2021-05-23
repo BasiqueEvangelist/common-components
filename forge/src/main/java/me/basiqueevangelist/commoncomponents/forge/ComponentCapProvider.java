@@ -9,11 +9,11 @@ import net.minecraftforge.common.util.LazyOptional;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class ComponentCapabilityProvider<T extends Component> implements ICapabilitySerializable<CompoundTag> {
-    private final CapabilityComponentRef<T> ref;
+public class ComponentCapProvider<T extends Component> implements ICapabilitySerializable<CompoundTag> {
+    private final CapComponentRef<T> ref;
     private final T capInstance;
 
-    public ComponentCapabilityProvider(CapabilityComponentRef<T> ref, T capInstance) {
+    public ComponentCapProvider(CapComponentRef<T> ref, T capInstance) {
         this.ref = ref;
         this.capInstance = capInstance;
     }
