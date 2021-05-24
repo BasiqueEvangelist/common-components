@@ -2,6 +2,7 @@ package me.basiqueevangelist.commoncomponents.test;
 
 import me.basiqueevangelist.commoncomponents.ComponentEvents;
 import me.basiqueevangelist.commoncomponents.DeferredComponentRef;
+import me.basiqueevangelist.commoncomponents.RespawnCopyStrategy;
 import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Items;
@@ -13,7 +14,7 @@ public class TestMod {
 
     public static void init() {
         ComponentEvents.ENTITY.register(registry -> {
-            registry.registerFor(LivingEntity.class, EXAMPLE_COMPONENT.get(), ExampleComponentImpl::new);
+            registry.registerForPlayers(EXAMPLE_COMPONENT.get(), ExampleComponentImpl::new, RespawnCopyStrategy.INVENTORY);
         });
 
         ComponentEvents.ITEM.register(registry -> {
