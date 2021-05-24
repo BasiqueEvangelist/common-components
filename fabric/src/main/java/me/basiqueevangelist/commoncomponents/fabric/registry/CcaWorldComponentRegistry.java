@@ -19,6 +19,6 @@ public class CcaWorldComponentRegistry implements WorldComponentRegistry {
 
     @Override
     public <T extends Component> void register(ComponentRef<T> ref, Function<World, T> factory) {
-        registry.register(((CcaComponentRef<T>) ref).getWrapped(), w -> new CcaComponent<>(factory.apply(w)));
+        registry.register(((CcaComponentRef<T>) ref).getWrapped(), w -> CcaComponent.getWrapperFor(factory.apply(w)));
     }
 }

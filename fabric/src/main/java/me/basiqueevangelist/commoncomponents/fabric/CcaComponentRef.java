@@ -20,8 +20,8 @@ public class CcaComponentRef<T extends Component> implements ComponentRef<T> {
     }
 
     @Override
-    public @Nullable T getFromHolder(Object holder) {
-        return wrapped.getNullable(holder).getWrapped();
+    public @Nullable T getFromHolder(Object provider) {
+        return wrapped.getNullable(provider).getWrapped();
     }
 
     @Override
@@ -32,5 +32,10 @@ public class CcaComponentRef<T extends Component> implements ComponentRef<T> {
     @Override
     public Class<T> getComponentClass() {
         return wrappedType;
+    }
+
+    @Override
+    public void sync(Object provider) {
+        wrapped.sync(provider);
     }
 }

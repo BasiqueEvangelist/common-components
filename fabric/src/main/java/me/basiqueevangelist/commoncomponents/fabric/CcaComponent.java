@@ -1,12 +1,11 @@
 package me.basiqueevangelist.commoncomponents.fabric;
 
-import dev.onyxstudios.cca.api.v3.component.Component;
+import me.basiqueevangelist.commoncomponents.Component;
+import me.basiqueevangelist.commoncomponents.SyncingComponent;
 import net.minecraft.nbt.CompoundTag;
 
-import java.util.Objects;
-
-public class CcaComponent<T extends me.basiqueevangelist.commoncomponents.Component> implements Component {
-    private final T wrapped;
+public class CcaComponent<T extends Component> implements dev.onyxstudios.cca.api.v3.component.Component {
+    protected final T wrapped;
 
     public CcaComponent(T wrapped) {
         this.wrapped = wrapped;
@@ -32,5 +31,13 @@ public class CcaComponent<T extends me.basiqueevangelist.commoncomponents.Compon
         if (o == null || getClass() != o.getClass()) return false;
         CcaComponent<?> that = (CcaComponent<?>) o;
         return wrapped.equals(that.wrapped);
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T extends Component> CcaComponent<T> getWrapperFor(T inst) {
+        if (SyncingComponent.class.isAssignableFrom(inst.getClass()))
+            return (CcaComponent<T>) new CcaSyncingComponent<>((SyncingComponent) inst);
+        else
+            return new CcaComponent<>(inst);
     }
 }

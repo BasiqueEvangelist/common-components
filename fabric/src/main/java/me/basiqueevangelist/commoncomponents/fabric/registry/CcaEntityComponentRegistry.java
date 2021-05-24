@@ -21,13 +21,13 @@ public class CcaEntityComponentRegistry implements EntityComponentRegistry {
 
     @Override
     public <T extends Component, E extends Entity> void registerFor(Class<E> target, ComponentRef<T> ref, Function<E, ? extends T> factory) {
-        ecfr.registerFor(target, ((CcaComponentRef<T>) ref).getWrapped(), entity -> new CcaComponent<>(factory.apply(entity)));
+        ecfr.registerFor(target, ((CcaComponentRef<T>) ref).getWrapped(), entity -> CcaComponent.getWrapperFor(factory.apply(entity)));
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public <T extends Component, Impl extends T> void registerForPlayers(ComponentRef<T> ref, Function<PlayerEntity, Impl> factory, RespawnCopyStrategy<? super Impl> respawnStrategy) {
-        ecfr.registerForPlayers(((CcaComponentRef<T>) ref).getWrapped(), player -> new CcaComponent<>(factory.apply(player)), (from, to, lossless, inventory) -> {
+        ecfr.registerForPlayers(((CcaComponentRef<T>) ref).getWrapped(), player -> CcaComponent.getWrapperFor(factory.apply(player)), (from, to, lossless, inventory) -> {
             respawnStrategy.copy(((CcaComponent<Impl>) from).getWrapped(), ((CcaComponent<Impl>) to).getWrapped(), lossless, inventory);
         });
     }

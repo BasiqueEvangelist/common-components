@@ -19,6 +19,6 @@ public class CcaChunkComponentRegistry implements ChunkComponentRegistry {
 
     @Override
     public <T extends Component> void register(ComponentRef<T> ref, Function<Chunk, T> factory) {
-        registry.register(((CcaComponentRef<T>) ref).getWrapped(), c -> new CcaComponent<>(factory.apply(c)));
+        registry.register(((CcaComponentRef<T>) ref).getWrapped(), c -> CcaComponent.getWrapperFor(factory.apply(c)));
     }
 }

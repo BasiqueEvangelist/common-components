@@ -24,16 +24,16 @@ public class CcaItemComponentRegistry implements ItemComponentRegistry {
     @Override
     @SuppressWarnings("unchecked")
     public <T extends Component> void registerFor(Item item, ComponentRef<T> ref, Function<ItemStack, ? extends T> factory) {
-        registry.registerFor(item, ((CcaComponentRef<T>) ref).getWrapped(), stack -> new CcaComponent<>(factory.apply(stack)));
+        registry.registerFor(item, ((CcaComponentRef<T>) ref).getWrapped(), stack -> CcaComponent.getWrapperFor(factory.apply(stack)));
     }
 
     @Override
     public <T extends Component> void registerFor(Identifier itemId, ComponentRef<T> ref, Function<ItemStack, ? extends T> factory) {
-        registry.registerFor(itemId, ((CcaComponentRef<T>) ref).getWrapped(), stack -> new CcaComponent<>(factory.apply(stack)));
+        registry.registerFor(itemId, ((CcaComponentRef<T>) ref).getWrapped(), stack -> CcaComponent.getWrapperFor(factory.apply(stack)));
     }
 
     @Override
     public <T extends Component> void registerFor(Predicate<Item> test, ComponentRef<T> ref, Function<ItemStack, ? extends T> factory) {
-        registry.registerFor(test, ((CcaComponentRef<T>) ref).getWrapped(), stack -> new CcaComponent<>(factory.apply(stack)));
+        registry.registerFor(test, ((CcaComponentRef<T>) ref).getWrapped(), stack -> CcaComponent.getWrapperFor(factory.apply(stack)));
     }
 }

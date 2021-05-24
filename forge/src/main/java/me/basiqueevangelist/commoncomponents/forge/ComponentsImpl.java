@@ -22,15 +22,6 @@ public class ComponentsImpl {
 
     @SuppressWarnings("unchecked")
     public static <T extends Component> ComponentRef<T> get(Identifier componentId, Class<T> componentInterface) {
-        IdentityHashMap<String, Capability<?>> providersMap;
-        try {
-            Field f = CapabilityManager.class.getDeclaredField("providers");
-            f.setAccessible(true);
-            providersMap = (IdentityHashMap<String, Capability<?>>) f.get(CapabilityManager.INSTANCE);
-        } catch (ReflectiveOperationException e) {
-            throw new RuntimeException(e);
-        }
-
-        return new CapComponentRef<>((Capability<T>) providersMap.get(componentInterface.getCanonicalName()), componentInterface, componentId);
+        return new CapComponentRef<>((Capability<T>) CapManagerUtils.providersMap.get(componentInterface.getCanonicalName()), componentInterface, componentId);
     }
 }

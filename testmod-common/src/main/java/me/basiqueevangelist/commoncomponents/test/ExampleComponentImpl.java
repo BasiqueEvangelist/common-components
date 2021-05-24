@@ -1,10 +1,11 @@
 package me.basiqueevangelist.commoncomponents.test;
 
+import me.basiqueevangelist.commoncomponents.SyncingComponent;
 import net.minecraft.nbt.CompoundTag;
 
 import java.util.Objects;
 
-public class ExampleComponentImpl implements ExampleComponent {
+public class ExampleComponentImpl implements ExampleComponent, SyncingComponent {
     private int value = 0;
 
     public ExampleComponentImpl(Object attachedTo) {

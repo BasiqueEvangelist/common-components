@@ -2,6 +2,7 @@ package me.basiqueevangelist.commoncomponents.forge;
 
 import me.basiqueevangelist.commoncomponents.Component;
 import me.basiqueevangelist.commoncomponents.ComponentRef;
+import me.basiqueevangelist.commoncomponents.forge.sync.CapSyncing;
 import net.minecraft.util.Identifier;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
@@ -23,8 +24,8 @@ public class CapComponentRef<T extends Component> implements ComponentRef<T> {
     }
 
     @Override
-    public @Nullable T getFromHolder(Object holder) {
-        return ((ICapabilityProvider) holder).getCapability(capability).orElse(null);
+    public @Nullable T getFromHolder(Object provider) {
+        return ((ICapabilityProvider) provider).getCapability(capability).orElse(null);
     }
 
     @Override
@@ -35,5 +36,10 @@ public class CapComponentRef<T extends Component> implements ComponentRef<T> {
     @Override
     public Class<T> getComponentClass() {
         return capClass;
+    }
+
+    @Override
+    public void sync(Object provider) {
+        CapSyncing.syncCap((ICapabilityProvider) provider, capability);
     }
 }

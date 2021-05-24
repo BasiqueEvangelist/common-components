@@ -20,6 +20,6 @@ public class CcaBlockComponentRegistry implements BlockComponentRegistry {
 
     @Override
     public <T extends Component, B extends BlockEntity> void registerFor(Class<B> target, ComponentRef<T> ref, Function<B, T> factory) {
-        registry.registerFor(target, ((CcaComponentRef<T>) ref).getWrapped(), be -> new CcaComponent<>(factory.apply(be)));
+        registry.registerFor(target, ((CcaComponentRef<T>) ref).getWrapped(), be -> CcaComponent.getWrapperFor(factory.apply(be)));
     }
 }
