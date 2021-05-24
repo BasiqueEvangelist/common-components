@@ -20,6 +20,8 @@ public final class PacketHandlers {
     static {
         CHANNEL.registerMessage(0, EntityCapSyncer.SyncPacket.class, EntityCapSyncer.SyncPacket::write, EntityCapSyncer.SyncPacket::read, EntityCapSyncer::readPacket);
         CHANNEL.registerMessage(1, ChunkCapSyncer.SyncPacket.class, ChunkCapSyncer.SyncPacket::write, ChunkCapSyncer.SyncPacket::read, ChunkCapSyncer::readPacket);
+        CHANNEL.registerMessage(2, BlockEntityCapSyncer.SyncPacket.class, BlockEntityCapSyncer.SyncPacket::write, BlockEntityCapSyncer.SyncPacket::read, BlockEntityCapSyncer::readPacket);
+        CHANNEL.registerMessage(3, WorldCapSyncer.SyncPacket.class, WorldCapSyncer.SyncPacket::write, WorldCapSyncer.SyncPacket::read, WorldCapSyncer::readPacket);
     }
 
     public static void init() {

@@ -1,13 +1,14 @@
 package me.basiqueevangelist.commoncomponents.forge.sync;
 
 import me.basiqueevangelist.commoncomponents.SyncingComponent;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.network.Packet;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.chunk.WorldChunk;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.fml.network.PacketDistributor;
 
 import java.util.List;
 
@@ -22,6 +23,10 @@ public final class CapSyncing {
             return (CapSyncer<T>) new EntityCapSyncer();
         } else if (provider instanceof WorldChunk) {
             return (CapSyncer<T>) new ChunkCapSyncer();
+        } else if (provider instanceof BlockEntity) {
+            return (CapSyncer<T>) new ChunkCapSyncer();
+        } else if (provider instanceof ServerWorld) {
+            return (CapSyncer<T>) new WorldCapSyncer();
         } else {
             throw new IllegalStateException("Couldn't find syncer for provider of type " + provider.getClass());
         }

@@ -5,6 +5,7 @@ import me.basiqueevangelist.commoncomponents.DeferredComponentRef;
 import me.basiqueevangelist.commoncomponents.RespawnCopyStrategy;
 import me.shedaniel.architectury.event.events.CommandRegistrationEvent;
 import net.minecraft.block.entity.ChestBlockEntity;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Items;
 import net.minecraft.server.command.ServerCommandSource;
@@ -26,9 +27,9 @@ public class TestMod {
 //            registry.registerFor(Items.STONE, EXAMPLE_COMPONENT.get(), ExampleComponentImpl::new);
 //        });
 
-//        ComponentEvents.WORLD.register(registry -> {
-//            registry.register(EXAMPLE_COMPONENT.get(), ExampleComponentImpl::new);
-//        });
+        ComponentEvents.WORLD.register(registry -> {
+            registry.register(EXAMPLE_COMPONENT.get(), ExampleComponentImpl::new);
+        });
 
 //        ComponentEvents.CHUNK.register(registry -> {
 //            registry.register(EXAMPLE_COMPONENT.get(), ExampleComponentImpl::new);
@@ -43,6 +44,9 @@ public class TestMod {
                 .executes(ctx -> {
                     ServerPlayerEntity player = ctx.getSource().getPlayer();
                     EXAMPLE_COMPONENT.get().sync(player);
+
+                    EXAMPLE_COMPONENT.get().sync(ctx.getSource().getWorld());
+
                     return 0;
                 }));
         });

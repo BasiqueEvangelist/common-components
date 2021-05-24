@@ -3,13 +3,15 @@ package me.basiqueevangelist.commoncomponents.forge.sync;
 import io.netty.buffer.Unpooled;
 import me.basiqueevangelist.commoncomponents.SyncingComponent;
 import me.basiqueevangelist.commoncomponents.forge.CapManagerUtils;
-import me.basiqueevangelist.commoncomponents.forge.EntityUtil;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.entity.Entity;
 import net.minecraft.network.Packet;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerChunkManager;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
@@ -18,11 +20,13 @@ import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-public class EntityCapSyncer implements CapSyncer<Entity> {
+public class BlockEntityCapSyncer implements CapSyncer<BlockEntity> {
     @Override
-    public Packet<?> toSyncingPacket(Entity provider, Capability<?> cap, SyncingComponent component, ServerPlayerEntity syncingWith) {
+    public Packet<?> toSyncingPacket(BlockEntity provider, Capability<?> cap, SyncingComponent component, ServerPlayerEntity syncingWith) {
         SyncPacket packet = new SyncPacket();
-        packet.entityId = provider.getEntityId();
+        packet.x = provider.getPos().getX();
+        packet.y = provider.getPos().getY();
+        packet.z = provider.getPos().getZ();
         packet.capName = cap.getName();
         packet.additionalData = new PacketByteBuf(Unpooled.buffer());
         component.toSyncPacket(packet.additionalData, syncingWith);
@@ -30,22 +34,17 @@ public class EntityCapSyncer implements CapSyncer<Entity> {
     }
 
     @Override
-    public List<ServerPlayerEntity> getSyncingPlayers(Entity provider, SyncingComponent component) {
-        List<ServerPlayerEntity> players = EntityUtil.getPlayersTracking(provider).stream().filter(component::syncsWith).collect(Collectors.toList());
-        if (provider instanceof ServerPlayerEntity && ((ServerPlayerEntity) provider).networkHandler != null) {
-            if (component.syncsWith((ServerPlayerEntity) provider))
-                players.add((ServerPlayerEntity) provider);
-        }
-        return players;
+    public List<ServerPlayerEntity> getSyncingPlayers(BlockEntity provider, SyncingComponent component) {
+        return ((ServerChunkManager) provider.getWorld().getChunkManager()).threadedAnvilChunkStorage.getPlayersWatchingChunk(new ChunkPos(provider.getPos()), false).filter(component::syncsWith).collect(Collectors.toList());
     }
 
     public static void readPacket(SyncPacket packet, Supplier<NetworkEvent.Context> ctxSupplier) {
         ClientWorld world = MinecraftClient.getInstance().world;
-        Entity entity = world.getEntityById(packet.entityId);
-        if (entity == null) return;
+        BlockEntity be = world.getBlockEntity(new BlockPos(packet.x, packet.y, packet.z));
+        if (be == null) return;
 
         Capability<?> cap = CapManagerUtils.providersMap.get(packet.capName.intern());
-        Object capInstance = entity.getCapability(cap).orElse(null);
+        Object capInstance = be.getCapability(cap).orElse(null);
         if (capInstance instanceof SyncingComponent) {
             ((SyncingComponent) capInstance).fromSyncPacket(packet.additionalData);
         }
@@ -54,19 +53,22 @@ public class EntityCapSyncer implements CapSyncer<Entity> {
     }
 
     public static class SyncPacket {
-        public int entityId;
+        public int x, y, z;
         public String capName;
         public PacketByteBuf additionalData;
 
         public void write(PacketByteBuf buf) {
-            buf.writeInt(entityId);
+            buf.writeLong(BlockPos.asLong(x, y, z));
             buf.writeString(capName);
             buf.writeBytes(additionalData.copy());
         }
 
         public static SyncPacket read(PacketByteBuf buf) {
             SyncPacket packet = new SyncPacket();
-            packet.entityId = buf.readInt();
+            long packedPos = buf.readLong();
+            packet.x = BlockPos.unpackLongX(packedPos);
+            packet.y = BlockPos.unpackLongY(packedPos);
+            packet.z = BlockPos.unpackLongZ(packedPos);
             packet.capName = buf.readString();
             packet.additionalData = new PacketByteBuf(buf.readBytes(buf.readableBytes()));
             return packet;

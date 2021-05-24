@@ -3,12 +3,10 @@ package me.basiqueevangelist.commoncomponents.forge.sync;
 import io.netty.buffer.Unpooled;
 import me.basiqueevangelist.commoncomponents.SyncingComponent;
 import me.basiqueevangelist.commoncomponents.forge.CapManagerUtils;
-import me.shedaniel.architectury.networking.NetworkManager;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.network.Packet;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.network.packet.s2c.play.CustomPayloadS2CPacket;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerChunkManager;
 import net.minecraft.util.math.ChunkPos;
@@ -42,7 +40,7 @@ public class ChunkCapSyncer implements CapSyncer<WorldChunk> {
         ClientWorld world = MinecraftClient.getInstance().world;
         WorldChunk chunk = world.getChunk(packet.chunkX, packet.chunkZ);
 
-        Capability<?> cap = CapManagerUtils.providersMap.get(packet.capName);
+        Capability<?> cap = CapManagerUtils.providersMap.get(packet.capName.intern());
         Object capInstance = chunk.getCapability(cap).orElse(null);
         if (capInstance instanceof SyncingComponent) {
             ((SyncingComponent) capInstance).fromSyncPacket(packet.additionalData);
