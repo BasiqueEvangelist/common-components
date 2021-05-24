@@ -12,7 +12,11 @@ public final class CapManagerUtils {
 
     }
 
-    public static final IdentityHashMap<String, Capability<?>> providersMap;
+    private static final IdentityHashMap<String, Capability<?>> providersMap;
+
+    public static Capability<?> getCapability(String name) {
+        return providersMap.get(name.intern());
+    }
 
     static {
         try {

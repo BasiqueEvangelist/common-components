@@ -40,7 +40,7 @@ public class ChunkCapSyncer implements CapSyncer<WorldChunk> {
         ClientWorld world = MinecraftClient.getInstance().world;
         WorldChunk chunk = world.getChunk(packet.chunkX, packet.chunkZ);
 
-        Capability<?> cap = CapManagerUtils.providersMap.get(packet.capName.intern());
+        Capability<?> cap = CapManagerUtils.getCapability(packet.capName);
         Object capInstance = chunk.getCapability(cap).orElse(null);
         if (capInstance instanceof SyncingComponent) {
             ((SyncingComponent) capInstance).fromSyncPacket(packet.additionalData);

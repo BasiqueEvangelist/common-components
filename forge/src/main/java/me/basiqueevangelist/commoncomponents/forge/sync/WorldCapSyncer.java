@@ -34,7 +34,7 @@ public class WorldCapSyncer implements CapSyncer<ServerWorld> {
 
     public static void readPacket(SyncPacket packet, Supplier<NetworkEvent.Context> ctxSupplier) {
         ClientWorld world = MinecraftClient.getInstance().world;
-        Capability<?> cap = CapManagerUtils.providersMap.get(packet.capName.intern());
+        Capability<?> cap = CapManagerUtils.getCapability(packet.capName);
         Object capInstance = world.getCapability(cap).orElse(null);
         if (capInstance instanceof SyncingComponent) {
             ((SyncingComponent) capInstance).fromSyncPacket(packet.additionalData);

@@ -43,7 +43,7 @@ public class BlockEntityCapSyncer implements CapSyncer<BlockEntity> {
         BlockEntity be = world.getBlockEntity(new BlockPos(packet.x, packet.y, packet.z));
         if (be == null) return;
 
-        Capability<?> cap = CapManagerUtils.providersMap.get(packet.capName.intern());
+        Capability<?> cap = CapManagerUtils.getCapability(packet.capName);
         Object capInstance = be.getCapability(cap).orElse(null);
         if (capInstance instanceof SyncingComponent) {
             ((SyncingComponent) capInstance).fromSyncPacket(packet.additionalData);

@@ -22,6 +22,6 @@ public class ComponentsImpl {
 
     @SuppressWarnings("unchecked")
     public static <T extends Component> ComponentRef<T> get(Identifier componentId, Class<T> componentInterface) {
-        return new CapComponentRef<>((Capability<T>) CapManagerUtils.providersMap.get(componentInterface.getCanonicalName()), componentInterface, componentId);
+        return new CapComponentRef<>((Capability<T>) CapManagerUtils.getCapability(componentInterface.getCanonicalName()), componentInterface, componentId);
     }
 }

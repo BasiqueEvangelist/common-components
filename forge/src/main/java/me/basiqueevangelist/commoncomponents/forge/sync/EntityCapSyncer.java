@@ -44,7 +44,7 @@ public class EntityCapSyncer implements CapSyncer<Entity> {
         Entity entity = world.getEntityById(packet.entityId);
         if (entity == null) return;
 
-        Capability<?> cap = CapManagerUtils.providersMap.get(packet.capName.intern());
+        Capability<?> cap = CapManagerUtils.getCapability(packet.capName);
         Object capInstance = entity.getCapability(cap).orElse(null);
         if (capInstance instanceof SyncingComponent) {
             ((SyncingComponent) capInstance).fromSyncPacket(packet.additionalData);
