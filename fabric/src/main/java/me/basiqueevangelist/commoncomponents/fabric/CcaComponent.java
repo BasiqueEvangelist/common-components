@@ -1,8 +1,13 @@
 package me.basiqueevangelist.commoncomponents.fabric;
 
+import me.basiqueevangelist.commoncomponents.ClientTickedComponent;
 import me.basiqueevangelist.commoncomponents.Component;
+import me.basiqueevangelist.commoncomponents.ServerTickedComponent;
 import me.basiqueevangelist.commoncomponents.SyncingComponent;
+import me.basiqueevangelist.commoncomponents.fabric.asm.CcaComponentSubclassGenerator;
 import net.minecraft.nbt.CompoundTag;
+
+import java.lang.reflect.InvocationTargetException;
 
 public class CcaComponent<T extends Component> implements dev.onyxstudios.cca.api.v3.component.Component {
     protected final T wrapped;
@@ -35,9 +40,17 @@ public class CcaComponent<T extends Component> implements dev.onyxstudios.cca.ap
 
     @SuppressWarnings("unchecked")
     public static <T extends Component> CcaComponent<T> getWrapperFor(T inst) {
-        if (SyncingComponent.class.isAssignableFrom(inst.getClass()))
-            return (CcaComponent<T>) new CcaSyncingComponent<>((SyncingComponent) inst);
-        else
-            return new CcaComponent<>(inst);
+        int flags = 0;
+        if (inst instanceof SyncingComponent)
+            flags |= CcaComponentSubclassGenerator.SYNCING;
+        if (inst instanceof ClientTickedComponent)
+            flags |= CcaComponentSubclassGenerator.CLIENT_TICKING;
+        if (inst instanceof ServerTickedComponent)
+            flags |= CcaComponentSubclassGenerator.SERVER_TICKING;
+        try {
+            return (CcaComponent<T>) CcaComponentSubclassGenerator.getClassFor(flags).getConstructor(Component.class).newInstance(inst);
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+            throw new RuntimeException("Couldn't get CCA wrapper for component due to reflection exception", e);
+        }
     }
 }
