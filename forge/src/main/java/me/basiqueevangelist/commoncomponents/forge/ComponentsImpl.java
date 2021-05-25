@@ -16,7 +16,9 @@ public class ComponentsImpl {
         CommonComponentsForge.COMMON_SETUP_TASKS.add(() -> {
             CapabilityManager.INSTANCE.register(componentInterface, new ComponentCapStorage<>(), defaultFactory::get);
 
-            ref.setRef(get(componentId, componentInterface));
+            CapComponentRef<T> cap = (CapComponentRef<T>) get(componentId, componentInterface);
+            CapTicking.caps.add(cap.getCapability());
+            ref.setRef(cap);
         });
     }
 

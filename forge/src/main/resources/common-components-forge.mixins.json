@@ -1,0 +1,17 @@
+
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "me.basiqueevangelist.commoncomponents.forge.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "ServerWorldMixin",
+    "WorldMixin"
+  ],
+  "client": [
+    "ClientWorldMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

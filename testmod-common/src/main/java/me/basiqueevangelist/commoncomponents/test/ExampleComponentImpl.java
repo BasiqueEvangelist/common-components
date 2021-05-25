@@ -1,8 +1,5 @@
 package me.basiqueevangelist.commoncomponents.test;
 
-import me.basiqueevangelist.commoncomponents.ClientTickedComponent;
-import me.basiqueevangelist.commoncomponents.ServerTickedComponent;
-import me.basiqueevangelist.commoncomponents.SyncingComponent;
 import net.minecraft.nbt.CompoundTag;
 
 import java.util.Objects;

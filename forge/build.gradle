@@ -13,6 +13,7 @@ architectury {
 
 loom {
     useFabricMixin = true
+    mixinConfigs = ["common-components-forge.mixins.json"]
 }
 
 dependencies {

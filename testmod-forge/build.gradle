@@ -6,6 +6,8 @@ loom {
     localMods {
         it.add(project(":forge").sourceSets.main)
     }
+
+    mixinConfigs = ["common-components-forge.mixins.json"]
 }
 
 architectury {

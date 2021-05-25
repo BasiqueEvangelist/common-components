@@ -2,9 +2,11 @@ package me.basiqueevangelist.commoncomponents.forge;
 
 import me.basiqueevangelist.commoncomponents.ComponentEvents;
 import me.basiqueevangelist.commoncomponents.forge.registry.*;
+import me.shedaniel.architectury.event.events.TickEvent;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.WorldChunk;
 import net.minecraftforge.common.MinecraftForge;
@@ -18,6 +20,7 @@ public final class ComponentEventHooksImpl {
 
     public static void init() {
         MinecraftForge.EVENT_BUS.register(ComponentEventHooksImpl.class);
+        TickEvent.SERVER_WORLD_POST.register(ComponentEventHooksImpl::onServerWorldEndTick);
     }
 
     @SubscribeEvent
@@ -43,5 +46,9 @@ public final class ComponentEventHooksImpl {
     @SubscribeEvent
     protected static void attachChunkCapabilities(AttachCapabilitiesEvent<WorldChunk> event) {
         ComponentEvents.CHUNK.invoker().registerChunkComponents(new CapChunkComponentRegistry(event));
+    }
+
+    private static void onServerWorldEndTick(ServerWorld world) {
+        CapTicking.tickCapsServer(world);
     }
 }
