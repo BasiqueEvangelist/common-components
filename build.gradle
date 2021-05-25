@@ -42,6 +42,7 @@ allprojects {
             name = 'Ladysnake Mods'
             url = 'https://ladysnake.jfrog.io/artifactory/mods'
         }
+        maven { url "https://auoeke.jfrog.io/artifactory/maven/" }
     }
 
     tasks.withType(JavaCompile) {

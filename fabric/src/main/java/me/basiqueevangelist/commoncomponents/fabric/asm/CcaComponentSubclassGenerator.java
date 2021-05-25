@@ -1,8 +1,10 @@
 package me.basiqueevangelist.commoncomponents.fabric.asm;
 
+import me.basiqueevangelist.commoncomponents.fabric.CcaComponent;
 import org.intellij.lang.annotations.MagicConstant;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
+import user11681.reflect.Classes;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -27,6 +29,9 @@ public final class CcaComponentSubclassGenerator {
     public static final int SERVER_TICKING = 4;
 
     public static Class<?> getClassFor(@MagicConstant(flagsFromClass = CcaComponentSubclassGenerator.class) int flags) {
+        if (flags == 0)
+            return CcaComponent.class;
+
         return PREGENERATED_CLASSES.computeIfAbsent(flags, unused -> {
             ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_FRAMES | ClassWriter.COMPUTE_MAXS);
 
@@ -54,7 +59,7 @@ public final class CcaComponentSubclassGenerator {
                 newMv.visitEnd();
             });
 
-            return CommonComponentsClassLoader.INSTANCE.defineClass(className.replace("/", "."), writer.toByteArray());
+            return Classes.defineClass(CcaComponentSubclassGenerator.class.getClassLoader(), className.replace("/", "."), writer.toByteArray());
         });
     }
 

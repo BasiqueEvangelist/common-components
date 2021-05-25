@@ -29,6 +29,9 @@ dependencies {
     shadowCommon(project(path: ":common", configuration: "transformProductionForge")) {
         transitive = false
     }
+
+    shadowCommon implementation("net.gudenau.lib:unsafe:1.4.3")
+    shadowCommon implementation("user11681:reflect:1.9.1")
 }
 
 processResources {

@@ -53,4 +53,16 @@ public class CcaComponent<T extends Component> implements dev.onyxstudios.cca.ap
             throw new RuntimeException("Couldn't get CCA wrapper for component due to reflection exception", e);
         }
     }
+
+    @SuppressWarnings("unchecked")
+    public static Class<? extends CcaComponent<?>> getWrapperForClass(Class<?> klass) {
+        int flags = 0;
+        if (SyncingComponent.class.isAssignableFrom(klass))
+            flags |= CcaComponentSubclassGenerator.SYNCING;
+        if (ClientTickedComponent.class.isAssignableFrom(klass))
+            flags |= CcaComponentSubclassGenerator.CLIENT_TICKING;
+        if (ServerTickedComponent.class.isAssignableFrom(klass))
+            flags |= CcaComponentSubclassGenerator.SERVER_TICKING;
+        return (Class<? extends CcaComponent<?>>) CcaComponentSubclassGenerator.getClassFor(flags);
+    }
 }

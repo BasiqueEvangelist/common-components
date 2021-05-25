@@ -1,11 +1,13 @@
 package me.basiqueevangelist.commoncomponents.test;
 
+import me.basiqueevangelist.commoncomponents.ClientTickedComponent;
+import me.basiqueevangelist.commoncomponents.ServerTickedComponent;
 import me.basiqueevangelist.commoncomponents.SyncingComponent;
 import net.minecraft.nbt.CompoundTag;
 
 import java.util.Objects;
 
-public class ExampleComponentImpl implements ExampleComponent, SyncingComponent {
+public class ExampleComponentImpl implements ExampleComponent {
     private int value = 0;
 
     public ExampleComponentImpl(Object attachedTo) {
@@ -43,5 +45,15 @@ public class ExampleComponentImpl implements ExampleComponent, SyncingComponent 
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    @Override
+    public void onClientTick() {
+//        System.out.println("client tick");
+    }
+
+    @Override
+    public void onServerTick() {
+//        System.out.println("server tick");
     }
 }

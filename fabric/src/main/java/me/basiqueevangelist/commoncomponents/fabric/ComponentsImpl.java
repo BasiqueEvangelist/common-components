@@ -12,7 +12,7 @@ import java.util.function.Supplier;
 public class ComponentsImpl {
     @SuppressWarnings({"unchecked", "rawtypes"})
     public static <T extends Component> void registerDeferred(DeferredComponentRef<T> ref, Identifier componentId, Class<T> componentInterface, Supplier<T> defaultFactory) {
-        ref.setRef((CcaComponentRef<T>) new CcaComponentRef(ComponentRegistry.getOrCreate(componentId, CcaComponent.class), componentInterface));
+        ref.setRef((CcaComponentRef<T>) new CcaComponentRef(ComponentRegistry.getOrCreate(componentId, CcaComponent.getWrapperForClass(componentInterface)), componentInterface));
     }
 
     @SuppressWarnings("unchecked")
