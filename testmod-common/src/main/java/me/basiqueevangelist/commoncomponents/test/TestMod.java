@@ -20,9 +20,9 @@ public class TestMod {
     public static final DeferredComponentRef<ExampleComponent> EXAMPLE_COMPONENT = new DeferredComponentRef<>(new Identifier(MODID, "example"), ExampleComponent.class, () -> new ExampleComponentImpl(null));
 
     public static void init() {
-//        ComponentEvents.ENTITY.register(registry -> {
-//            registry.registerForPlayers(EXAMPLE_COMPONENT.get(), ExampleComponentImpl::new, RespawnCopyStrategy.INVENTORY);
-//        });
+        ComponentEvents.ENTITY.register(registry -> {
+            registry.registerForPlayers(EXAMPLE_COMPONENT.get(), ExampleComponentImpl::new, RespawnCopyStrategy.INVENTORY);
+        });
 
 //        ComponentEvents.ITEM.register(registry -> {
 //            registry.registerFor(Items.STONE, EXAMPLE_COMPONENT.get(), ExampleComponentImpl::new);

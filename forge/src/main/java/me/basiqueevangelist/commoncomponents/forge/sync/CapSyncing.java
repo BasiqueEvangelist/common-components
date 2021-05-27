@@ -1,6 +1,7 @@
 package me.basiqueevangelist.commoncomponents.forge.sync;
 
 import me.basiqueevangelist.commoncomponents.SyncingComponent;
+import me.basiqueevangelist.commoncomponents.forge.CapManagerUtils;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.network.Packet;
@@ -44,6 +45,25 @@ public final class CapSyncing {
                 Packet<?> packet = syncer.toSyncingPacket(provider, cap, (SyncingComponent) inst, player);
                 player.networkHandler.sendPacket(packet);
             }
+        }
+    }
+
+    public static <T extends ICapabilityProvider> void syncAllWith(T provider, ServerPlayerEntity player) {
+        CapSyncer<T> syncer = getSyncerFor(provider);
+        for (Capability<?> cap : CapManagerUtils.allCapabilities()) {
+            Object inst = provider.getCapability(cap).orElse(null);
+
+            if (!(inst instanceof SyncingComponent)) continue;
+            if (!((SyncingComponent) inst).syncsWith(player)) continue;;
+
+            Packet<?> packet = syncer.toSyncingPacket(provider, cap, (SyncingComponent) inst, player);
+            player.networkHandler.sendPacket(packet);
+        }
+    }
+
+    public static <T extends ICapabilityProvider> void syncAll(T provider) {
+        for (Capability<?> cap : CapManagerUtils.allCapabilities()) {
+            syncCap(provider, cap);
         }
     }
 }

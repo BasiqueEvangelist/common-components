@@ -1,14 +1,16 @@
 package me.basiqueevangelist.commoncomponents.test;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.PacketByteBuf;
 
 import java.util.Objects;
 
 public class ExampleComponentImpl implements ExampleComponent {
     private int value = 0;
+    private final Object attachedTo;
 
     public ExampleComponentImpl(Object attachedTo) {
-        System.out.println("Called! " + (attachedTo == null ? "null" : attachedTo.getClass()));
+        this.attachedTo = attachedTo;
     }
 
     @Override
@@ -52,5 +54,11 @@ public class ExampleComponentImpl implements ExampleComponent {
     @Override
     public void onServerTick() {
 //        System.out.println("server tick");
+    }
+
+    @Override
+    public void fromSyncPacket(PacketByteBuf buf) {
+        System.out.println("Synced! " + attachedTo.getClass());
+        fromTag(buf.readCompoundTag());
     }
 }

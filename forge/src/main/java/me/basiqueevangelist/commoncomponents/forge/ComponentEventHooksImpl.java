@@ -2,15 +2,18 @@ package me.basiqueevangelist.commoncomponents.forge;
 
 import me.basiqueevangelist.commoncomponents.ComponentEvents;
 import me.basiqueevangelist.commoncomponents.forge.registry.*;
+import me.basiqueevangelist.commoncomponents.forge.sync.CapSyncing;
 import me.shedaniel.architectury.event.events.TickEvent;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.WorldChunk;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public final class ComponentEventHooksImpl {
@@ -50,5 +53,25 @@ public final class ComponentEventHooksImpl {
 
     private static void onServerWorldEndTick(ServerWorld world) {
         CapTicking.tickCapsServer(world);
+    }
+
+    @SubscribeEvent
+    protected static void onStartTrackingEntity(PlayerEvent.StartTracking event) {
+        CapSyncing.syncAllWith(event.getTarget(), (ServerPlayerEntity) event.getPlayer());
+    }
+
+    @SubscribeEvent
+    protected static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
+        CapSyncing.syncAllWith(event.getPlayer(), (ServerPlayerEntity) event.getPlayer());
+    }
+
+    @SubscribeEvent
+    protected static void onPlayerRespawned(PlayerEvent.PlayerRespawnEvent event) {
+        CapSyncing.syncAllWith(event.getPlayer(), (ServerPlayerEntity) event.getPlayer());
+    }
+
+    @SubscribeEvent
+    protected static void onPlayerChangedDimension(PlayerEvent.PlayerChangedDimensionEvent event) {
+        CapSyncing.syncAllWith(event.getPlayer(), (ServerPlayerEntity) event.getPlayer());
     }
 }
