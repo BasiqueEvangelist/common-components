@@ -15,7 +15,7 @@
   "environment": "*",
   "entrypoints": {
     "cardinal-components": [
-      "me.basiqueevangelist.commoncomponents.fabric.ComponentEventHooksImpl"
+      "me.basiqueevangelist.commoncomponents.component.fabric.ComponentEventHooksImpl"
     ]
   },
   "depends": {

@@ -1,6 +1,6 @@
 package me.basiqueevangelist.commoncomponents.forge.mixin;
 
-import me.basiqueevangelist.commoncomponents.forge.sync.CapSyncing;
+import me.basiqueevangelist.commoncomponents.component.forge.sync.CapSyncing;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;

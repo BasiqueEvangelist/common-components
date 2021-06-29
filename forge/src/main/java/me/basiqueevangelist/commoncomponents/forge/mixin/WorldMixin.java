@@ -1,6 +1,6 @@
 package me.basiqueevangelist.commoncomponents.forge.mixin;
 
-import me.basiqueevangelist.commoncomponents.forge.CapTicking;
+import me.basiqueevangelist.commoncomponents.component.forge.CapTicking;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.profiler.Profiler;

@@ -1,9 +1,9 @@
 package me.basiqueevangelist.commoncomponents.test;
 
-import me.basiqueevangelist.commoncomponents.ClientTickedComponent;
-import me.basiqueevangelist.commoncomponents.Component;
-import me.basiqueevangelist.commoncomponents.ServerTickedComponent;
-import me.basiqueevangelist.commoncomponents.SyncingComponent;
+import me.basiqueevangelist.commoncomponents.component.ClientTickedComponent;
+import me.basiqueevangelist.commoncomponents.component.Component;
+import me.basiqueevangelist.commoncomponents.component.ServerTickedComponent;
+import me.basiqueevangelist.commoncomponents.component.SyncingComponent;
 
 public interface ExampleComponent extends Component, SyncingComponent, ClientTickedComponent, ServerTickedComponent {
     int getValue();

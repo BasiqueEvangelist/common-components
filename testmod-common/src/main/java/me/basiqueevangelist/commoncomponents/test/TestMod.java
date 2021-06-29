@@ -1,15 +1,9 @@
 package me.basiqueevangelist.commoncomponents.test;
 
-import me.basiqueevangelist.commoncomponents.ComponentEvents;
-import me.basiqueevangelist.commoncomponents.DeferredComponentRef;
-import me.basiqueevangelist.commoncomponents.RespawnCopyStrategy;
+import me.basiqueevangelist.commoncomponents.component.ComponentEvents;
+import me.basiqueevangelist.commoncomponents.component.DeferredComponentRef;
+import me.basiqueevangelist.commoncomponents.component.RespawnCopyStrategy;
 import me.shedaniel.architectury.event.events.CommandRegistrationEvent;
-import net.minecraft.block.entity.ChestBlockEntity;
-import net.minecraft.block.entity.FurnaceBlockEntity;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.Items;
-import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 

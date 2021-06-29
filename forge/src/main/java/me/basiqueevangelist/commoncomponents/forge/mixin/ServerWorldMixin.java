@@ -1,6 +1,6 @@
 package me.basiqueevangelist.commoncomponents.forge.mixin;
 
-import me.basiqueevangelist.commoncomponents.forge.CapTicking;
+import me.basiqueevangelist.commoncomponents.component.forge.CapTicking;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.chunk.WorldChunk;

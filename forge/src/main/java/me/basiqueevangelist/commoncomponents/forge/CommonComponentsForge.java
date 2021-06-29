@@ -1,11 +1,11 @@
 package me.basiqueevangelist.commoncomponents.forge;
 
-import me.basiqueevangelist.commoncomponents.forge.sync.PacketHandlers;
+import me.basiqueevangelist.commoncomponents.component.forge.CapCopying;
+import me.basiqueevangelist.commoncomponents.component.forge.ComponentEventHooksImpl;
+import me.basiqueevangelist.commoncomponents.component.forge.sync.PacketHandlers;
 import me.shedaniel.architectury.platform.forge.EventBuses;
 import me.basiqueevangelist.commoncomponents.CommonComponents;
-import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
